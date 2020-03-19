@@ -3,7 +3,7 @@ description: Driver for STM-F4 Ethernet
 fullname: lib.stm.f4eth
 info:
     chip_manufacturer: STM 
-    chip_name: f4 
+    chip_name: F4 Ethernet
     name: Ethernet Driver
     type: Connectivity
 keywords:
