@@ -32,6 +32,7 @@ To use it: ::
         "#csrc/misc/zstdlib.c",
         "#csrc/misc/snprintf.c",
         "#csrc/zsockets/*",
+        "#csrc/hwcrypto/*",
         #-if ZERYNTH_SSL
         "#csrc/tls/mbedtls/library/*",
         #-endif
@@ -57,6 +58,7 @@ To use it: ::
         "-I.../csrc/lwip",
         "-I#csrc/zsockets",
         "-I#csrc/misc",
+        "-I#csrc/hwcrypto",
         #-if ZERYNTH_SSL
         "-I#csrc/tls/mbedtls/include"
         #-endif
@@ -90,7 +92,6 @@ def link():
 def is_linked():
     pass
 
-
 @native_c("f4_eth_unlink",["csrc/*"])
 def unlink():
     pass
@@ -104,68 +105,62 @@ def link_info():
 def set_link_info(ip,mask,gw,dns):
     pass
 
-@native_c("f4_net_resolve",["csrc/*"])
-def gethostbyname(hostname):
-    pass
-
-
-@native_c("f4_net_socket",["csrc/*"])
-def socket(family,type,proto):
-    pass
-
-@native_c("f4_net_setsockopt",["csrc/*"])
+@native_c("py_net_setsockopt",[])
 def setsockopt(sock,level,optname,value):
     pass
 
-
-@native_c("f4_net_close",["csrc/*"])
+@native_c("py_net_close",[])
 def close(sock):
     pass
 
-
-@native_c("f4_net_sendto",["csrc/*"])
-def sendto(sock,buf,addr,flags=0):
-    pass
-
-@native_c("f4_net_send",["csrc/*"])
-def send(sock,buf,flags=0):
-    pass
-
-@native_c("f4_net_send_all",["csrc/*"])
-def sendall(sock,buf,flags=0):
-    pass
-
-
-@native_c("f4_net_recv_into",["csrc/*"])
-def recv_into(sock,buf,bufsize,flags=0,ofs=0):
-    pass
-
-
-@native_c("f4_net_recvfrom_into",["csrc/*"])
-def recvfrom_into(sock,buf,bufsize,flags=0):
-    pass
-
-
-@native_c("f4_net_bind",["csrc/*"])
-def bind(sock,addr):
-    pass
-
-@native_c("f4_net_listen",["csrc/*"])
-def listen(sock,maxlog=2):
-    pass
-
-@native_c("f4_net_accept",["csrc/*"])
-def accept(sock):
-    pass
-
-@native_c("f4_net_connect",["csrc/*"])
+@native_c("py_net_connect",[])
 def connect(sock,addr):
     pass
 
-@native_c("f4_net_select",[])
+@native_c("py_net_select",[])
 def select(rlist,wist,xlist,timeout):
     pass
 
-@native_c("f4_secure_socket",[],[])
+@native_c("py_net_send",[])
+def send(sock,buf,flags=0):
+    pass
+
+@native_c("py_net_send_all",[])
+def sendall(sock,buf,flags=0):
+    pass
+
+@native_c("py_net_recv_into",[])
+def recv_into(sock,buf,bufsize,flags=0,ofs=0):
+    pass
+
+@native_c("py_net_recvfrom_into",[])
+def recvfrom_into(sock,buf,bufsize,flags=0):
+    pass
+
+@native_c("py_net_sendto",[])
+def sendto(sock,buf,addr,flags=0):
+    pass
+
+@native_c("py_net_bind",[])
+def bind(sock,addr):
+    pass
+
+@native_c("py_net_listen",[])
+def listen(sock,maxlog=2):
+    pass
+
+@native_c("py_net_resolve",[])
+def gethostbyname(hostname):
+    pass
+
+@native_c("py_net_socket",[])
+def socket(family,type,proto):
+    pass
+
+@native_c("py_net_accept",[])
+def accept(sock):
+    pass
+
+@native_c("py_secure_socket",[],[])
 def secure_socket(family, type, proto, ctx):
     pass

@@ -287,7 +287,9 @@ struct mem {
  * how that space is calculated). */
 #ifndef LWIP_RAM_HEAP_POINTER
 /** the heap. we need one struct mem at the end and some room for alignment */
-LWIP_DECLARE_MEMORY_ALIGNED(ram_heap, MEM_SIZE_ALIGNED + (2U*SIZEOF_STRUCT_MEM));
+// LWIP_DECLARE_MEMORY_ALIGNED(ram_heap, MEM_SIZE_ALIGNED + (2U*SIZEOF_STRUCT_MEM));
+
+u8_t *ram_heap=NULL;
 #define LWIP_RAM_HEAP_POINTER ram_heap
 #endif /* LWIP_RAM_HEAP_POINTER */
 
@@ -385,6 +387,9 @@ mem_init(void)
 
   LWIP_ASSERT("Sanity check alignment",
     (SIZEOF_STRUCT_MEM & (MEM_ALIGNMENT-1)) == 0);
+  /** INIT HEAP WITH zmalloc **/
+  ram_heap = zmalloc(MEM_SIZE_ALIGNED + (2U*SIZEOF_STRUCT_MEM));
+// LWIP_DECLARE_MEMORY_ALIGNED(ram_heap, MEM_SIZE_ALIGNED + (2U*SIZEOF_STRUCT_MEM));
 
   /* align the heap */
   ram = (u8_t *)LWIP_MEM_ALIGN(LWIP_RAM_HEAP_POINTER);

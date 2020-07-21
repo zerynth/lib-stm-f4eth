@@ -54,7 +54,7 @@
 /* The time to block waiting for input. */
 #define TIME_WAITING_FOR_INPUT                 ( TIME_U(1000,MILLIS) )
 /* Stack size of the interface thread */
-#define INTERFACE_THREAD_STACK_SIZE            ( 350 )
+#define INTERFACE_THREAD_STACK_SIZE            ( 1024 )
 
 /* Define those to better describe your network interface. */
 #define IFNAME0 's'
